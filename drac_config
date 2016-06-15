@@ -4,17 +4,17 @@
 usage() {
 cat << EOF
 Usage: drac_confing action server...
- action   - action to perform:
-  view		 - connect to KVM
-  racreset	 - restart DRAC
-  clrsel	 - clear DRAC sel
-  powerup	 - power on
+ action - action to perform:
+  view       - connect to KVM
+  racreset   - restart DRAC
+  clrsel     - clear DRAC sel
+  powerup    - power on
   powerdown  - power off
   hardreset  - hard reset
   createraid - build a RAID1 of 2 first disks
   deleteraid - delete any existing RAIDs
   deployssl  - deploy ssl certs and settings
- server   - one or more servers to connect to
+ server - one or more servers to connect to
 EOF
 }
 
