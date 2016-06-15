@@ -46,10 +46,22 @@ if [ ! -f $RACADM ]; then
 	exit 1
 fi
 
+if [ -z "$PASS" ]; then
+	stty -echo
+	read -p "Password for $USER: " PASS
+	stty echo
+	echo
+	if [ -z "$PASS" ]; then
+		echo "Empty password given!"
+		exit 1
+	fi
+fi
+
 while [ $# -ne 0 ]; do
 	export host=$1
 	export racadm="$RACADM -u ${USER} -p ${PASS} -r $host"
-	
+
+	echo "Trying to determine iDRAC model..."
 	ractype=$( ($racadm get iDRAC.Info | grep '#Type=' || $racadm  getconfig -g idracinfo | grep 'idRacType=' ) | tr -d '\r' | tr -d '\n' | cut -d '=' -f 2)
 
 	case "$ractype" in
