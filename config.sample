@@ -5,6 +5,9 @@
 export USER="root"
 export PASS="dupa.8"
 
+# Location of racadm binary
+RACADM="/opt/dell/srvadmin/bin/idracadm7"
+
 # Deployment of various things
 
 # password change
