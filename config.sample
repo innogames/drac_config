@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# Primary login used by this program
+# Leave password empty to be asked for it.
+export USER="root"
+export PASS="dupa.8"
+
+# Deployment of various things
+
+# password change
+export DEP_CHPASS="newpassword"
+
+# ntp servers
+export DEP_NTP1="10.42.42.42"
+export DEP_NTP2="10.42.42.24"
+
+#  monitorig user
+export DEP_MONUSER="monuser"
+export DEP_MONPASS="monpass"
+
