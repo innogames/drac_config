@@ -20,4 +20,5 @@ export DEP_NTP2="10.42.42.24"
 #  monitorig user
 export DEP_MONUSER="monuser"
 export DEP_MONPASS="monpass"
+export DEP_MONID="3" # Id of user to be configured
 
