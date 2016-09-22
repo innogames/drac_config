@@ -14,6 +14,7 @@ Collection of shell scripts for managing iDRACs.
 
 ## Log
 * clrsel - clear DRAC sel
+* getsel - display DRAC sel
 
 ## KVM
 * view - connect to KVM
@@ -24,4 +25,7 @@ Collection of shell scripts for managing iDRACs.
 
 ## SSL (not yet supported)
 * deployssl - deploy ssl certs and settings
+
+## User management
+* monuser - deploy user with limited permissions for monitoring
 
