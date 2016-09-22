@@ -7,6 +7,7 @@ Usage: drac_confing action server...
  action - action to perform:
   view       - connect to KVM
   racreset   - restart DRAC
+  getsel     - get DRAC sel
   clrsel     - clear DRAC sel
   powerup    - power on
   powerdown  - power off
@@ -95,7 +96,10 @@ while [ $# -ne 0 ]; do
 			$racadm racreset
 			;;
 		"clrsel")
-			$racadm clrsel
+			sh $libdir/sel.sh $action
+			;;
+		"getsel")
+			sh $libdir/sel.sh $action
 			;;
 		"powerup")
 			$racadm serveraction $action
