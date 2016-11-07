@@ -16,6 +16,7 @@ Usage: drac_confing action server...
   deleteraid - delete any existing RAIDs
   deployssl  - deploy ssl certs and settings
   setntp     - configure ntp client, also works for CMCs
+  setconsole - configure virtual console access
   monuser    - configure monitoring user and its password
  server - one or more servers to connect to
 EOF
@@ -121,6 +122,9 @@ while [ $# -ne 0 ]; do
 			;;
 		"setntp")
 			sh $libdir/ntp.sh $action
+			;;
+		"setconsole")
+			sh $libdir/console.sh $action
 			;;
 		"monuser")
 			sh $libdir/monuser.sh
