@@ -9,7 +9,7 @@ export PASS="dupa.8"
 RACADM="/opt/dell/srvadmin/bin/idracadm7"
 
 # If you do not have Drac Tools installed or macOS use Docker
-# RACADM="docker run --rm innogames/idrac7adm"
+# RACADM="docker run --rm innogames/idrac7adm /opt/dell/srvadmin/bin/idracadm7"
 
 # Deployment of various things
 
