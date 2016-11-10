@@ -8,6 +8,9 @@ export PASS="dupa.8"
 # Location of racadm binary
 RACADM="/opt/dell/srvadmin/bin/idracadm7"
 
+# If you do not have Drac Tools installed or macOS use Docker
+# RACADM="docker run --rm innogames/idrac7adm"
+
 # Deployment of various things
 
 # password change
