@@ -29,3 +29,5 @@ Collection of shell scripts for managing iDRACs.
 ## User management
 * monuser - deploy user with limited permissions for monitoring
 
+# Not having the Dell OpenManage DRAC Tools installed or using macOS?
+You can use Docker, please check the config.sample
