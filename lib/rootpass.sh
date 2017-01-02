@@ -4,11 +4,7 @@
 case "$model" in
 	M1000e)
         # Root user ID is 1 on CMC.
-cat > /tmp/drac_config_user << EOF
-[iDRAC.Users.1]
-cfgUserAdminPassword=${DEP_MONPASS}
-EOF
-		$racadm config -f /tmp/drac_config_user
+		$racadm config -g cfgUserAdmin -o cfgUserAdminPassword  -i 1 ${DEP_CHPASS}
 	;;
 	iDRAC[78])
 cat > /tmp/drac_config_user << EOF
