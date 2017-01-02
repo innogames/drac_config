@@ -18,6 +18,7 @@ Usage: drac_confing action server...
   setntp     - configure ntp client, also works for CMCs
   setconsole - configure virtual console access
   monuser    - configure monitoring user and its password
+  rootpass   - set root user password
  server - one or more servers to connect to
 EOF
 }
@@ -128,6 +129,9 @@ while [ $# -ne 0 ]; do
 			;;
 		"monuser")
 			sh $libdir/monuser.sh
+			;;
+		"rootpass")
+			sh $libdir/rootpass.sh
 			;;
 		*)
 			echo "Uknown server action specified"
