@@ -3,7 +3,25 @@
 
 case "$model" in
 	M1000e)
-		echo $racadm 
+cat > /tmp/drac_config_user << EOF
+[iDRAC.Users.${DEP_MONID}]
+cfgUserAdminIndex=${DEP_MONID}
+cfgUserAdminUserName=${DEP_MONUSER}
+cfgUserAdminPassword=${DEP_MONPASS}
+cfgUserAdminEnable=1
+cfgUserAdminPrivilege=0x0
+cfgUserAdminSNMPv3Enable=0
+cfgUserAdminSNMPv3AuthenticationType=SHA
+cfgUserAdminSNMPv3PrivacyType=AES
+EOF
+#		$racadm config -g cfgUserAdmin -o cfgUserAdminUserName  -i ${DEP_MONID} ${DEP_MONUSER}
+#		$racadm config -g cfgUserAdmin -o cfgUserAdminPassword  -i ${DEP_MONID} ${DEP_MONPASS}
+#		$racadm config -g cfgUserAdmin -o cfgUserAdminEnable    -i ${DEP_MONID} 1
+#		$racadm config -g cfgUserAdmin -o cfgUserAdminPrivilege -i ${DEP_MONID} 0x00000001
+#		$racadm config -g cfgUserAdmin -o cfgUserAdminIpmiLanPrivilege    -i ${DEP_MONID} 2
+#		$racadm config -g cfgUserAdmin -o cfgUserAdminIpmiSerialPrivilege -i ${DEP_MONID} 15
+#		$racadm config -g cfgUserAdmin -o cfgUserAdminSolEnable           -i ${DEP_MONID} 0
+		$racadm config -f /tmp/drac_config_user
 	;;
 	iDRAC[78])
 cat > /tmp/drac_config_user << EOF
