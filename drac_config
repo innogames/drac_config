@@ -66,6 +66,7 @@ while [ $# -ne 0 ]; do
 	export host=$1
 	export racadm="$RACADM -u ${USER} -p ${PASS} -r $host"
 
+	echo " --- Working on $host --- "
 	echo "Trying to determine iDRAC model..."
 	ractype=$( ($racadm get iDRAC.Info | grep '#Type=' || $racadm  getconfig -g idracinfo | grep 'idRacType=' ) | tr -d '\r' | tr -d '\n' | cut -d '=' -f 2)
 
@@ -88,7 +89,7 @@ while [ $# -ne 0 ]; do
 			;;
 	esac
 
-	echo " --- Working on $host, $model --- "
+	echo "It is $model"
 
 	case "$action" in
 		"view")
