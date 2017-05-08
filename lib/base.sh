@@ -43,10 +43,6 @@ case "$model" in
 		    echo "cfgRhostsSyslogEnable=1" >> $tf
         fi
 
-        echo "[cfgRacTuning]" >> $tf
-        echo "cfgRacTuneTimezoneOffset=$DEP_TIMEOFFSET" >> $tf
-        echo "cfgRacTuneDaylightOffset=$DEP_DAYLIGHTOFFSET" >> $tf
-
         $racadm config -f $tf
         rm $tf
 	;;
