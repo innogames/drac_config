@@ -17,16 +17,23 @@ EOF
 		$racadm config -f /tmp/drac_config_user
 	;;
 	iDRAC[78])
-cat > /tmp/drac_config_user << EOF
-[iDRAC.Users.${DEP_MONID}]
-IpmiLanPrivilege=2
-Password=${DEP_MONPASS}
-Privilege=0x9
-SNMPv3Enable=Disabled
-UserName=${DEP_MONUSER}
-Enable=Enabled
+        tf=$(mktemp)
+        cat > $tf << EOF
+<SystemConfiguration>
+<Component FQDD="iDRAC.Embedded.1">
+<Attribute Name="Users.${DEP_MONID}#UserName">${DEP_MONUSER}</Attribute>
+<Attribute Name="Users.${DEP_MONID}#Password">${DEP_MONPASS}</Attribute>
+<Attribute Name="Users.${DEP_MONID}#Privilege">9</Attribute>
+<Attribute Name="Users.${DEP_MONID}#IpmiLanPrivilege">user</Attribute>
+<Attribute Name="Users.${DEP_MONID}#Enable">Enabled</Attribute>
+<Attribute Name="Users.${DEP_MONID}#SolEnable">Disabled</Attribute>
+<Attribute Name="Users.${DEP_MONID}#ProtocolEnable">Disabled</Attribute>
+<Attribute Name="Users.${DEP_MONID}#AuthenticationProtocol">SHA</Attribute>
+<Attribute Name="Users.${DEP_MONID}#PrivacyProtocol">AES</Attribute>
+</Component>
+</SystemConfiguration>
 EOF
-		$racadm set -f /tmp/drac_config_user
+		$racadm set -f $tf -t xml
 	;;
 	iDRAC6)
 		$racadm config -g cfgUserAdmin -o cfgUserAdminEnable    -i ${DEP_MONID} 1
