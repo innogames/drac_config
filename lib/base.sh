@@ -18,8 +18,8 @@ case "$model" in
         fi
 
         if [ -n "$DEP_SYSLOG1" ] || [ -n "$DEP_SYSLOG2" ]; then
-    		[ -n "$dep_syslog1" ] && echo "cfgRhostsSyslogServer1=$DEP_SYSLOG1" >> $tf
-    		[ -n "$dep_syslog2" ] && echo "cfgRhostsSyslogServer2=$DEP_SYSLOG2" >> $tf
+            [ -n "$DEP_SYSLOG1" ] && echo "cfgRhostsSyslogServer1=$DEP_SYSLOG1" >> $tf
+            [ -n "$DEP_SYSLOG2" ] && echo "cfgRhostsSyslogServer2=$DEP_SYSLOG2" >> $tf
 		    echo "cfgRhostsSyslogEnable=1" >> $tf
         fi
 
