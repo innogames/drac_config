@@ -12,15 +12,15 @@ case "$model" in
         echo "[cfgRemoteHosts]" >> $tf
 
         if [ -n "$DEP_NTP1" ] || [ -n "$DEP_NTP2" ]; then
+            echo "cfgRhostsNtpEnable=1" >> $tf
             [ -n "$DEP_NTP1" ] && echo "cfgRhostsNtpServer1=$DEP_NTP1" >> $tf
             [ -n "$DEP_NTP2" ] && echo "cfgRhostsNtpServer2=$DEP_NTP2" >> $tf
-            echo "cfgRhostsNtpEnable=1" >> $tf
         fi
 
         if [ -n "$DEP_SYSLOG1" ] || [ -n "$DEP_SYSLOG2" ]; then
+		    echo "cfgRhostsSyslogEnable=1" >> $tf
             [ -n "$DEP_SYSLOG1" ] && echo "cfgRhostsSyslogServer1=$DEP_SYSLOG1" >> $tf
             [ -n "$DEP_SYSLOG2" ] && echo "cfgRhostsSyslogServer2=$DEP_SYSLOG2" >> $tf
-		    echo "cfgRhostsSyslogEnable=1" >> $tf
         fi
 
         echo "[cfgRacTuning]" >> $tf
@@ -38,9 +38,9 @@ case "$model" in
         # iDRAC 6 seems to have no NTP client
 
         if [ -n "$DEP_SYSLOG1" ] || [ -n "$DEP_SYSLOG2" ]; then
+            echo "cfgRhostsSyslogEnable=1" >> $tf
             [ -n "$DEP_SYSLOG1" ] && echo "cfgRhostsSyslogServer1=$DEP_SYSLOG1" >> $tf
             [ -n "$DEP_SYSLOG2" ] && echo "cfgRhostsSyslogServer2=$DEP_SYSLOG2" >> $tf
-		    echo "cfgRhostsSyslogEnable=1" >> $tf
         fi
 
         $racadm config -f $tf
