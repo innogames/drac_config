@@ -5,20 +5,32 @@ usage() {
 cat << EOF
 Usage: drac_confing action server...
  action - action to perform:
+  # Server access
   view       - connect to KVM
+
+  # DRAC management
   racreset   - restart DRAC
   getsel     - get DRAC sel
   clrsel     - clear DRAC sel
+  monuser    - configure monitoring user and its password
+  rootpass   - set root user password
+
+  # Power management
   powerup    - power on
   powerdown  - power off
   hardreset  - hard reset
+
+  # RAID (only iDRAC7 and 8)
   createraid - build a RAID1 of 2 first disks
   deleteraid - delete any existing RAIDs
+
+  # DRAC deployment
+  base       - configure all base settings: NTP, SNMP.
+               You can use DC environment variable to deploy settings for
+               a particular datacenter.
   deployssl  - deploy ssl certs and settings
-  setntp     - configure ntp client, also works for CMCs
   setconsole - configure virtual console access
-  monuser    - configure monitoring user and its password
-  rootpass   - set root user password
+
  server - one or more servers to connect to
 EOF
 }
@@ -122,8 +134,8 @@ while [ $# -ne 0 ]; do
 		"deployssl")
 			sh $libdir/deployssl.sh
 			;;
-		"setntp")
-			sh $libdir/ntp.sh $action
+		"base")
+			sh $libdir/base.sh $action
 			;;
 		"setconsole")
 			sh $libdir/console.sh $action
