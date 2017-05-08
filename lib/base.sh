@@ -30,17 +30,52 @@ case "$model" in
         $racadm config -f $tf
         rm $tf
 	;;
-	iDRAC*)
-#cat > /tmp/drac_config_ntp << EOF
-#[iDrac.NTPConfigGroup]
-#NTP1=10.30.0.250
-#NTP2=10.14.0.250
-#NTP3=
-#NTPEnable=Enabled
-#NTPMaxDist=16
-#EOF
-		$racadm get iDrac.NTPConfigGroup
+	iDRAC6)
+        tf=$(mktemp)
+
+        echo "[cfgRemoteHosts]" >> $tf
+
+        # iDRAC 6 seems to have no NTP client
+
+        if [ -n "$DEP_SYSLOG1" ] || [ -n "$DEP_SYSLOG2" ]; then
+            [ -n "$DEP_SYSLOG1" ] && echo "cfgRhostsSyslogServer1=$DEP_SYSLOG1" >> $tf
+            [ -n "$DEP_SYSLOG2" ] && echo "cfgRhostsSyslogServer2=$DEP_SYSLOG2" >> $tf
+		    echo "cfgRhostsSyslogEnable=1" >> $tf
+        fi
+
+        echo "[cfgRacTuning]" >> $tf
+        echo "cfgRacTuneTimezoneOffset=$DEP_TIMEOFFSET" >> $tf
+        echo "cfgRacTuneDaylightOffset=$DEP_DAYLIGHTOFFSET" >> $tf
+
+        $racadm config -f $tf
+        rm $tf
 	;;
+	iDRAC[78])
+        tf=$(mktemp)
+
+        echo '<SystemConfiguration Model="" ServiceTag="" TimeStamp="">' >> $tf
+        echo '<Component FQDD="iDRAC.Embedded.1">' >> $tf
+
+        if [ -n "$DEP_SYSLOG1" ] || [ -n "$DEP_SYSLOG2" ]; then
+            echo '<Attribute Name="SysLog.1#SysLogEnable">Disabled</Attribute>' >> $tf
+            [ -n "$DEP_SYSLOG1" ] && echo '<Attribute Name="SysLog.1#Server1">'$DEP_SYSLOG1'</Attribute>' >> $tf
+            [ -n "$DEP_SYSLOG2" ] && echo '<Attribute Name="SysLog.1#Server1">'$DEP_SYSLOG2'</Attribute>' >> $tf
+        fi
+
+        if [ -n "$DEP_NTP1" ] || [ -n "$DEP_NTP2" ]; then
+            echo '<Attribute Name="NTPConfigGroup.1#NTPEnable">Enabled</Attribute>' >>  $tf
+            [ -n "$DEP_NTP1" ] && echo '<Attribute Name="NTPConfigGroup.1#NTP1">'$DEP_NTP1'</Attribute>' >> $tf
+            [ -n "$DEP_NTP2" ] && echo '<Attribute Name="NTPConfigGroup.1#NTP2">'$DEP_NTP2'</Attribute>' >> $tf
+        fi
+        echo '<Attribute Name="Time.1#TimeZone">'$DEP_TZ'</Attribute>' >> $tf
+
+        echo '</Component>' >> $tf
+        echo '</SystemConfiguration>' >> $tf
+
+        $racadm set -f $tf -t xml
+        rm $tf
+	;;
+
 	*)
 		echo "Can not view $host because of its hardware model '$model'!"
 	;;
