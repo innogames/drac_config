@@ -21,6 +21,7 @@ EOF
         cat > $tf << EOF
 <SystemConfiguration>
 <Component FQDD="iDRAC.Embedded.1">
+<Attribute Name="IPMILan.1#Enable">Enabled</Attribute>
 <Attribute Name="Users.${DEP_MONID}#UserName">${DEP_MONUSER}</Attribute>
 <Attribute Name="Users.${DEP_MONID}#Password">${DEP_MONPASS}</Attribute>
 <Attribute Name="Users.${DEP_MONID}#Privilege">9</Attribute>
@@ -36,6 +37,7 @@ EOF
 		$racadm set -f $tf -t xml
 	;;
 	iDRAC6)
+		$racadm config -g cfgIpmiLan -o cfgIpmiLanEnable 1
 		$racadm config -g cfgUserAdmin -o cfgUserAdminEnable    -i ${DEP_MONID} 1
 		$racadm config -g cfgUserAdmin -o cfgUserAdminUserName  -i ${DEP_MONID} ${DEP_MONUSER}
 		$racadm config -g cfgUserAdmin -o cfgUserAdminPassword  -i ${DEP_MONID} ${DEP_MONPASS}
