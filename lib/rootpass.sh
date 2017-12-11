@@ -4,6 +4,7 @@
 case "$model" in
 	M1000e)
         # Root user ID is 1 on CMC.
+		$racadm config -g cfgQuickDeploy -o cfgiDRACRootPassword  ${DEP_CHPASS}
 		$racadm config -g cfgUserAdmin -o cfgUserAdminPassword  -i 1 ${DEP_CHPASS}
 	;;
 	iDRAC[78])
