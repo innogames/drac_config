@@ -3,7 +3,7 @@
 # Please note that racadm returns empty lines and \r on the next line.
 # This is why we put each command via tr and awk to get proper strings.
 
-if ! ( [ "$model" = "iDRAC7" ] || [ "$model" = "iDRAC8" ] ); then
+if ! ( [ "$model" = "iDRAC7" ] || [ "$model" = "iDRAC8" ] || [ "$model" = "iDRAC9" ] ); then
 	echo "Raid configuration possible only on PowerEdge [RM]6[23]0 (or rather iDRAC [78])."
 	exit 1
 fi

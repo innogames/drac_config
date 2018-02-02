@@ -16,7 +16,7 @@ cfgUserAdminSNMPv3PrivacyType=AES
 EOF
 		$racadm config -f /tmp/drac_config_user
 	;;
-	iDRAC[78])
+	iDRAC[789])
         tf=$(mktemp)
         cat > $tf << EOF
 <SystemConfiguration>

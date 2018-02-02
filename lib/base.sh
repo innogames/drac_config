@@ -46,7 +46,7 @@ case "$model" in
         $racadm config -f $tf
         rm $tf
 	;;
-	iDRAC[78])
+	iDRAC[789])
         tf=$(mktemp)
 
         echo '<SystemConfiguration Model="" ServiceTag="" TimeStamp="">' >> $tf

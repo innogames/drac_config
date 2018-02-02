@@ -7,7 +7,7 @@ case "$model" in
 		$racadm config -g cfgQuickDeploy -o cfgiDRACRootPassword  ${DEP_CHPASS}
 		$racadm config -g cfgUserAdmin -o cfgUserAdminPassword  -i 1 ${DEP_CHPASS}
 	;;
-	iDRAC[78])
+	iDRAC[789])
 cat > /tmp/drac_config_user << EOF
 [iDRAC.Users.${DEP_ROOTID}]
 Password=${DEP_CHPASS}
