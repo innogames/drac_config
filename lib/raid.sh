@@ -29,7 +29,12 @@ if [ "$1" = "deleteraid" ]; then
 			$racadm jobqueue create $CONTROLLER -r forced
 		done
 		exit
+	else
+		echo "No RAID to delete"
+		exit
 	fi
+
+
 fi
 
 if [ "$1" = "createraid" ]; then
