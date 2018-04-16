@@ -95,7 +95,7 @@ while [ $# -ne 0 ]; do
 		32|33)
 			export model="iDRAC8"
 			;;
-		"14G Monolithic")
+		"14G Monolithic"|"14G Modular")
 			export model="iDRAC9"
 			;;
 		*)
