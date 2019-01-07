@@ -1,16 +1,22 @@
 #!/bin/sh
 
-#$racadm set iDrac.Security.CsrKeySize 4096
+KEYFILE="${workdir}/ipmi_certificates/${host}_key.pem"
+CERTFILE="${workdir}/ipmi_certificates/${host}_cert.pem"
+CHAINFILE="${workdir}/ipmi_certificates/${host}_cert_chain.pem"
+
+if ! [ -f "$CERTFILE" ]; then
+	echo "Could not find certificate file for this server!"
+	exit 1
+fi
 
 case "$model" in
-	iDRAC6)
-        tf=$(mktemp)
-        echo "[cfgRacSecurityData]" >> $tf
-        echo "cfgRacSecCsrIndex=1" >> $tf
-        echo "cfgRacSecCsrCommonName=$host" >> $tf
-        $racadm config -f $tf
-        rm $tf
-
-        $racadm sslcsrgen -g -f /tmp/$host.req
+	iDRAC6|M1000e)
+		# iDRAC6 reboots automatically but does not support chains.
+		$racadm sslcertupload -t 1 -f "$CERTFILE"
+	;;
+	iDRAC[789])
+		$racadm sslkeyupload -t  1 -f "$KEYFILE"
+		$racadm sslcertupload -t 1 -f "$CHAINFILE"
+		$racadm racreset
 	;;
 esac

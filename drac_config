@@ -28,7 +28,9 @@ Usage: drac_confing action server...
   base       - configure all base settings: NTP, SNMP.
                You can use DC environment variable to deploy settings for
                a particular datacenter.
-  deployssl  - deploy ssl certs and settings
+  resetssl   - reset SSL to default settings
+  requestssl - configure ssl settings and create a CSR
+  deployssl  - deploy signed cert
   setconsole - configure virtual console access
 
  server - one or more servers to connect to
@@ -133,6 +135,12 @@ while [ $# -ne 0 ]; do
 			;;
 		"deleteraid")
 			sh $libdir/raid.sh $action
+			;;
+		"resetssl")
+			$racadm sslresetcfg
+			;;
+		"requestssl")
+			sh $libdir/requestssl.sh
 			;;
 		"deployssl")
 			sh $libdir/deployssl.sh
