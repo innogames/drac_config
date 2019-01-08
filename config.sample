@@ -30,8 +30,8 @@ fi
 
 
 # Time zone
-DEP_TIMEOFFSET=0
-DEP_DAYLIGHTOFFSET=0
+export DEP_TIMEOFFSET=0
+export DEP_DAYLIGHTOFFSET=0
 
 #  monitorig user
 export DEP_MONUSER="monuser"
