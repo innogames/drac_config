@@ -9,65 +9,49 @@ case "$model" in
 	M1000e)
         tf=$(mktemp)
 
-        echo "[cfgRemoteHosts]" >> $tf
+        cat > $tf << EOF
+[cfgRemoteHosts]
+cfgRhostsNtpEnable=1
+cfgRhostsNtpServer1=$DEP_NTP1
+cfgRhostsNtpServer2=$DEP_NTP2
 
-        if [ -n "$DEP_NTP1" ] || [ -n "$DEP_NTP2" ]; then
-            echo "cfgRhostsNtpEnable=1" >> $tf
-            [ -n "$DEP_NTP1" ] && echo "cfgRhostsNtpServer1=$DEP_NTP1" >> $tf
-            [ -n "$DEP_NTP2" ] && echo "cfgRhostsNtpServer2=$DEP_NTP2" >> $tf
-        fi
+cfgRhostsSyslogEnable=1
+cfgRhostsSyslogServer1=$DEP_SYSLOG
 
-        if [ -n "$DEP_SYSLOG1" ] || [ -n "$DEP_SYSLOG2" ]; then
-		    echo "cfgRhostsSyslogEnable=1" >> $tf
-            [ -n "$DEP_SYSLOG1" ] && echo "cfgRhostsSyslogServer1=$DEP_SYSLOG1" >> $tf
-            [ -n "$DEP_SYSLOG2" ] && echo "cfgRhostsSyslogServer2=$DEP_SYSLOG2" >> $tf
-        fi
-
-        echo "[cfgRacTuning]" >> $tf
-        echo "cfgRacTuneTimezoneOffset=$DEP_TIMEOFFSET" >> $tf
-        echo "cfgRacTuneDaylightOffset=$DEP_DAYLIGHTOFFSET" >> $tf
-
+[cfgRacTuning]
+cfgRacTuneIdracDNSLaunchEnable=1
+cfgRacTuneTimezoneOffset=$DEP_TIMEOFFSET
+cfgRacTuneDaylightOffset=$DEP_DAYLIGHTOFFSET
+EOF
         $racadm config -f $tf
         rm $tf
 	;;
 	iDRAC6)
         tf=$(mktemp)
 
-        echo "[cfgRemoteHosts]" >> $tf
-
-        # iDRAC 6 seems to have no NTP client
-
-        if [ -n "$DEP_SYSLOG1" ] || [ -n "$DEP_SYSLOG2" ]; then
-            echo "cfgRhostsSyslogEnable=1" >> $tf
-            [ -n "$DEP_SYSLOG1" ] && echo "cfgRhostsSyslogServer1=$DEP_SYSLOG1" >> $tf
-            [ -n "$DEP_SYSLOG2" ] && echo "cfgRhostsSyslogServer2=$DEP_SYSLOG2" >> $tf
-        fi
-
+	cat > $tf << EOF
+[cfgRemoteHosts]
+cfgRhostsSyslogEnable=1
+cfgRhostsSyslogServer1=$DEP_SYSLOG
+EOF
         $racadm config -f $tf
         rm $tf
 	;;
 	iDRAC[789])
         tf=$(mktemp)
 
-        echo '<SystemConfiguration Model="" ServiceTag="" TimeStamp="">' >> $tf
-        echo '<Component FQDD="iDRAC.Embedded.1">' >> $tf
-
-        if [ -n "$DEP_SYSLOG1" ] || [ -n "$DEP_SYSLOG2" ]; then
-            echo '<Attribute Name="SysLog.1#SysLogEnable">Disabled</Attribute>' >> $tf
-            [ -n "$DEP_SYSLOG1" ] && echo '<Attribute Name="SysLog.1#Server1">'$DEP_SYSLOG1'</Attribute>' >> $tf
-            [ -n "$DEP_SYSLOG2" ] && echo '<Attribute Name="SysLog.1#Server1">'$DEP_SYSLOG2'</Attribute>' >> $tf
-        fi
-
-        if [ -n "$DEP_NTP1" ] || [ -n "$DEP_NTP2" ]; then
-            echo '<Attribute Name="NTPConfigGroup.1#NTPEnable">Enabled</Attribute>' >>  $tf
-            [ -n "$DEP_NTP1" ] && echo '<Attribute Name="NTPConfigGroup.1#NTP1">'$DEP_NTP1'</Attribute>' >> $tf
-            [ -n "$DEP_NTP2" ] && echo '<Attribute Name="NTPConfigGroup.1#NTP2">'$DEP_NTP2'</Attribute>' >> $tf
-        fi
-        echo '<Attribute Name="Time.1#TimeZone">'$DEP_TZ'</Attribute>' >> $tf
-
-        echo '</Component>' >> $tf
-        echo '</SystemConfiguration>' >> $tf
-
+	cat > $tf << EOF
+<SystemConfiguration Model="" ServiceTag="" TimeStamp="">
+<Component FQDD="iDRAC.Embedded.1">
+<Attribute Name="SysLog.1#SysLogEnable">Disabled</Attribute>
+<Attribute Name="SysLog.1#Server1">$DEP_SYSLOG</Attribute>
+<Attribute Name="NTPConfigGroup.1#NTPEnable">Enabled</Attribute>
+<Attribute Name="NTPConfigGroup.1#NTP1">$DEP_NTP1</Attribute>
+<Attribute Name="NTPConfigGroup.1#NTP2">$DEP_NTP2</Attribute>
+<Attribute Name="Time.1#TimeZone">$DEP_TZ</Attribute>
+</Component>
+</SystemConfiguration>
+EOF
         $racadm set -f $tf -t xml
         rm $tf
 	;;

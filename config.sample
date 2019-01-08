@@ -21,17 +21,17 @@ export DEP_CHPASS="newpassword"
 if [ "$DC" = "somedc" ]; then
     export DEP_NTP1="10.42.0.1"
     export DEP_NTP2="10.42.0.2"
-    export DEP_SYSLOG1="10.42.0.3"
+    export DEP_SYSLOG="10.42.0.3"
 elif [ "$DC" = "otherdc" ]; then
     export DEP_NTP1="10.42.1.1"
     export DEP_NTP2="10.42.1.2"
-    export DEP_SYSLOG1="10.42.1.3"
+    export DEP_SYSLOG="10.42.1.3"
 fi
 
 
 # Time zone
-DEP_TIMEOFFSET=7200
-DEP_DAYLIGHTOFFSET=3600
+DEP_TIMEOFFSET=0
+DEP_DAYLIGHTOFFSET=0
 
 #  monitorig user
 export DEP_MONUSER="monuser"
