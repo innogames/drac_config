@@ -28,10 +28,14 @@ Usage: drac_confing action server...
   base       - configure all base settings: NTP, SNMP.
                You can use DC environment variable to deploy settings for
                a particular datacenter.
+  setconsole - configure virtual console access
+
+  # SSL operations. Reuqires IG ca-utils in in the same directory as
+  # drac_config is deployed.
+  fullssl    - perform full ssl deployment
   resetssl   - reset SSL to default settings
   requestssl - configure ssl settings and create a CSR
   deployssl  - deploy signed cert
-  setconsole - configure virtual console access
 
  server - one or more servers to connect to
 EOF
@@ -135,6 +139,9 @@ while [ $# -ne 0 ]; do
 			;;
 		"deleteraid")
 			sh $libdir/raid.sh $action
+			;;
+		"fullssl")
+			sh $libdir/fullssl.sh
 			;;
 		"resetssl")
 			$racadm sslresetcfg
