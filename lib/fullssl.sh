@@ -7,11 +7,11 @@ case "$model" in
 		echo "Signing CSR"
 		$workdir/../ca-utils/scripts/generate_ipmi_cert.sh $host
 		echo "Deploying certificate"
-		sh -x $libdir/deployssl.sh
+		sh $libdir/deployssl.sh
 	;;
 	iDRAC[789])
 		$workdir/../ca-utils/scripts/generate_ipmi_cert.sh $host
-		sh -x $libdir/deployssl.sh
+		sh $libdir/deployssl.sh
 		$racadm racreset
 	;;
 esac
