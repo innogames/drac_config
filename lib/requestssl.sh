@@ -32,8 +32,7 @@ EOF
 	iDRAC6)
 	tf=$(mktemp)
 	cat << EOF > $tf
-[cfgRacSecurityData]
-cfgRacSecCsrIndex=1
+[cfgRacSecurity]
 cfgRacSecCsrKeySize=2048
 cfgRacSecCsrCommonName=$host
 cfgRacSecCsrOrganizationName=InnoGames GmbH
