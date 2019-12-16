@@ -3,7 +3,7 @@
 cj=$(mktemp)
 jnlp=$(mktemp)
 case "$model" in
-	iDRAC6)
+	iDRAC6-*)
 		cookie=$(curl --cookie-jar $cj --cookie $cj -s -k --data "WEBVAR_USERNAME=${USER}&WEBVAR_PASSWORD=${PASS}&WEBVAR_ISCMCLOGIN=0" https://${host}/Applications/dellUI/RPC/WEBSES/create.asp | sed -rn '/SESSION_COOKIE/ s/.*SESSION_COOKIE'\'' : '\''([a-zA-Z0-9]+)'\''.*/\1/p')
 		curl --cookie-jar $cj --cookie $cj -s -k -o $jnlp --cookie "Cookie=SessionCookie=$cookie" "https://${host}/Applications/dellUI/Java/jviewer.jnlp"
 		;;

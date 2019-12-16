@@ -14,7 +14,7 @@ Password=${DEP_CHPASS}
 EOF
 		$racadm set -f /tmp/drac_config_user
 	;;
-	iDRAC6)
+	iDRAC6-*)
         echo $racadm
 		$racadm config -g cfgUserAdmin -o cfgUserAdminPassword  -i ${DEP_ROOTID} ${DEP_CHPASS}
 		;;

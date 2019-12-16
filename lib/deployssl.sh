@@ -15,7 +15,7 @@ case "$model" in
 	M1000e)
 		$racadm sslcertupload -t 1 -f "$CHAINFILE"
 	;;
-	iDRAC6)
+	iDRAC6-*)
 		# iDRAC6 reboots automatically but does not support chains.
 		$racadm sslcertupload -t 1 -f "$CERTFILE"
 	;;

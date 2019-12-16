@@ -1,7 +1,7 @@
 #!/bin/sh
 
 case "$model" in
-	iDRAC6|M1000e)
+	iDRAC6-*|M1000e)
 		echo "Requesting CSR"
 		sh $libdir/requestssl.sh
 		echo "Signing CSR"

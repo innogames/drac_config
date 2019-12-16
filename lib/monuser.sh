@@ -36,7 +36,7 @@ EOF
 EOF
 		$racadm set -f $tf -t xml
 	;;
-	iDRAC6)
+	iDRAC6-*)
 		$racadm config -g cfgIpmiLan -o cfgIpmiLanEnable 1
 		$racadm config -g cfgUserAdmin -o cfgUserAdminEnable    -i ${DEP_MONID} 1
 		$racadm config -g cfgUserAdmin -o cfgUserAdminUserName  -i ${DEP_MONID} ${DEP_MONUSER}

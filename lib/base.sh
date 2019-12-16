@@ -26,7 +26,7 @@ EOF
         $racadm config -f $tf
         rm $tf
 	;;
-	iDRAC6)
+	iDRAC6-*)
         tf=$(mktemp)
 
 	cat > $tf << EOF

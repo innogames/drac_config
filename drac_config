@@ -87,13 +87,17 @@ while [ $# -ne 0 ]; do
 	echo " --- Working on $host --- "
 	echo "Trying to determine iDRAC model..."
 	ractype=$( ($racadm get iDRAC.Info | grep '#Type=' || $racadm  getconfig -g idracinfo | grep 'idRacType=' ) | tr -d '\r' | tr -d '\n' | cut -d '=' -f 2)
+	echo "DRAC type is ${ractype}"
 
 	case "$ractype" in
 		8)
 			export model="M1000e"
 			;;
-		10|11)
-			export model="iDRAC6"
+		10)
+			export model="iDRAC6-standalone"
+			;;
+		11)
+			export model="iDRAC6-blade"
 			;;
 		16|17)
 			export model="iDRAC7"

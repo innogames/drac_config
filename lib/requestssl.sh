@@ -29,7 +29,26 @@ EOF
 	$racadm sslcsrgen -g
 	$racadm sslcsrgen -f "${certdir}/${host}_csr.pem"
 	;;
-	iDRAC6)
+	iDRAC6-blade)
+	tf=$(mktemp)
+	cat << EOF > $tf
+[cfgRacSecurityData]
+cfgRacSecCsrIndex=1
+cfgRacSecCsrKeySize=2048
+cfgRacSecCsrCommonName=$host
+cfgRacSecCsrOrganizationName=InnoGames GmbH
+cfgRacSecCsrOrganizationUnit=System Administration
+cfgRacSecCsrLocalityName=Hamburg
+cfgRacSecCsrStateName=Hamburg
+cfgRacSecCsrCountryCode=DE
+cfgRacSecCsrEmailAddr=it@innogames.com
+EOF
+	$racadm config -f $tf
+	rm $tf
+	$racadm sslcsrgen -g
+	$racadm sslcsrgen -f "${certdir}/${host}_csr.pem"
+	;;
+	iDRAC6-standalone)
 	tf=$(mktemp)
 	cat << EOF > $tf
 [cfgRacSecurity]
