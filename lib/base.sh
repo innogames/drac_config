@@ -18,13 +18,25 @@ cfgRhostsNtpServer2=$DEP_NTP2
 cfgRhostsSyslogEnable=1
 cfgRhostsSyslogServer1=$DEP_SYSLOG
 
+cfgRhostsSyslogPowerLoggingEnabled=1
+cfgRhostsSyslogPowerLoggingInterval=1
+
 [cfgRacTuning]
 cfgRacTuneIdracDNSLaunchEnable=1
 cfgRacTuneTimezoneOffset=$DEP_TIMEOFFSET
 cfgRacTuneDaylightOffset=$DEP_DAYLIGHTOFFSET
+
+[cfgChassisPower]
+cfgChassisPowerCapPercent=100 %
+cfgChassisPowerCapFPercent=100 %
+cfgChassisRedundancyPolicy=1
+
+[cfgLanNetworking]
+cfgDNSServer1=$DEP_DNS
 EOF
         $racadm config -f $tf
         rm $tf
+        $racadm setchassisname $host
 	;;
 	iDRAC6-*)
         tf=$(mktemp)
