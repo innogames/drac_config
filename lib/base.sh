@@ -28,6 +28,8 @@ cfgRacTuneDaylightOffset=$DEP_DAYLIGHTOFFSET
 cfgChassisPowerCapPercent=100 %
 cfgChassisPowerCapFPercent=100 %
 cfgChassisRedundancyPolicy=1
+cfgChassisPerformanceOverRedundancy=0
+cfgChassisDynamicPSUEngagementEnable=0
 
 [cfgLanNetworking]
 cfgDNSServer1=$DEP_DNS
