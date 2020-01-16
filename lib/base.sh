@@ -3,10 +3,8 @@
 # Please note that racadm returns empty lines and \r on the next line.
 # This is why we put each command via tr and awk to get proper strings.
 
-#$racadm get iDrac.NTPConfigGroup
-
 case "$model" in
-	M1000e)
+    M1000e)
         tf=$(mktemp)
 
         cat > $tf << EOF
@@ -37,22 +35,22 @@ EOF
         $racadm config -f $tf
         rm $tf
         $racadm setchassisname $host
-	;;
-	iDRAC6-*)
+    ;;
+    iDRAC6-*)
         tf=$(mktemp)
 
-	cat > $tf << EOF
+    cat > $tf << EOF
 [cfgRemoteHosts]
 cfgRhostsSyslogEnable=1
 cfgRhostsSyslogServer1=$DEP_SYSLOG
 EOF
         $racadm config -f $tf
         rm $tf
-	;;
-	iDRAC[789])
+    ;;
+    iDRAC[789])
         tf=$(mktemp)
 
-	cat > $tf << EOF
+    cat > $tf << EOF
 <SystemConfiguration Model="" ServiceTag="" TimeStamp="">
 <Component FQDD="iDRAC.Embedded.1">
 <Attribute Name="SysLog.1#SysLogEnable">Disabled</Attribute>
@@ -66,10 +64,10 @@ EOF
 EOF
         $racadm set -f $tf -t xml
         rm $tf
-	;;
+    ;;
 
-	*)
-		echo "Can not view $host because of its hardware model '$model'!"
-	;;
+    *)
+        echo "Can not view $host because of its hardware model '$model'!"
+    ;;
 esac
 

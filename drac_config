@@ -42,17 +42,17 @@ EOF
 }
 
 if [ -z "$1" ]; then
-	echo "Give me action to perform!"
-	usage
-	exit 1
+    echo "Give me action to perform!"
+    usage
+    exit 1
 fi
 action=$1
 
 shift
 if [ -z "$1" ]; then
-	echo "Give me name of the server!"
-	usage
-	exit 1
+    echo "Give me name of the server!"
+    usage
+    exit 1
 fi
 
 workdir=$(dirname $0)
@@ -65,115 +65,115 @@ cd $oldpwd
 . $workdir/config
 
 if [ ! -f $RACADM ]; then
-	echo "I could not find racadm binary $RACADM"
-	exit 1
+    echo "I could not find racadm binary $RACADM"
+    exit 1
 fi
 
 if [ -z "$PASS" ]; then
-	stty -echo
-	read -p "Password for $USER: " PASS
-	stty echo
-	echo
-	if [ -z "$PASS" ]; then
-		echo "Empty password given!"
-		exit 1
-	fi
+    stty -echo
+    read -p "Password for $USER: " PASS
+    stty echo
+    echo
+    if [ -z "$PASS" ]; then
+        echo "Empty password given!"
+        exit 1
+    fi
 fi
 
 while [ $# -ne 0 ]; do
-	export host=$1
-	export racadm="$RACADM -u ${USER} -p ${PASS} -r $host"
+    export host=$1
+    export racadm="$RACADM -u ${USER} -p ${PASS} -r $host"
 
-	echo " --- Working on $host --- "
-	echo "Trying to determine iDRAC model..."
-	ractype=$( ($racadm get iDRAC.Info | grep '#Type=' || $racadm  getconfig -g idracinfo | grep 'idRacType=' ) | tr -d '\r' | tr -d '\n' | cut -d '=' -f 2)
-	echo "DRAC type is ${ractype}"
+    echo " --- Working on $host --- "
+    echo "Trying to determine iDRAC model..."
+    ractype=$( ($racadm get iDRAC.Info | grep '#Type=' || $racadm  getconfig -g idracinfo | grep 'idRacType=' ) | tr -d '\r' | tr -d '\n' | cut -d '=' -f 2)
+    echo "DRAC type is ${ractype}"
 
-	case "$ractype" in
-		8)
-			export model="M1000e"
-			;;
-		10)
-			export model="iDRAC6-standalone"
-			;;
-		11)
-			export model="iDRAC6-blade"
-			;;
-		16|17)
-			export model="iDRAC7"
-			;;
-		32|33)
-			export model="iDRAC8"
-			;;
-		"14G Monolithic"|"14G Modular")
-			export model="iDRAC9"
-			;;
-		*)
-			echo "Unsupported ractype $ractype"
-			exit 1
-			;;
-	esac
+    case "$ractype" in
+        8)
+            export model="M1000e"
+            ;;
+        10)
+            export model="iDRAC6-standalone"
+            ;;
+        11)
+            export model="iDRAC6-blade"
+            ;;
+        16|17)
+            export model="iDRAC7"
+            ;;
+        32|33)
+            export model="iDRAC8"
+            ;;
+        "14G Monolithic"|"14G Modular")
+            export model="iDRAC9"
+            ;;
+        *)
+            echo "Unsupported ractype $ractype"
+            exit 1
+            ;;
+    esac
 
-	echo "It is $model"
+    echo "It is $model"
 
-	case "$action" in
-		"view")
-			sh $libdir/view.sh
-			;;
-		"racreset")
-			$racadm racreset
-			;;
-		"clrsel")
-			sh $libdir/sel.sh $action
-			;;
-		"getsel")
-			sh $libdir/sel.sh $action
-			;;
-		"powerup")
-			$racadm serveraction $action
-			;;
-		"powerdown")
-			$racadm serveraction $action
-			;;
-		"hardreset")
-			$racadm serveraction $action
-			;;
-		"createraid")
-			sh $libdir/raid.sh $action
-			;;
-		"deleteraid")
-			sh $libdir/raid.sh $action
-			;;
-		"fullssl")
-			sh $libdir/fullssl.sh
-			;;
-		"resetssl")
-			$racadm sslresetcfg
-			;;
-		"requestssl")
-			sh $libdir/requestssl.sh
-			;;
-		"deployssl")
-			sh $libdir/deployssl.sh
-			;;
-		"base")
-			sh $libdir/base.sh $action
-			;;
-		"setconsole")
-			sh $libdir/console.sh $action
-			;;
-		"monuser")
-			sh $libdir/monuser.sh
-			;;
-		"rootpass")
-			sh $libdir/rootpass.sh
-			;;
-		*)
-			echo "Uknown server action specified"
-			;;
-	esac
+    case "$action" in
+        "view")
+            sh $libdir/view.sh
+            ;;
+        "racreset")
+            $racadm racreset
+            ;;
+        "clrsel")
+            sh $libdir/sel.sh $action
+            ;;
+        "getsel")
+            sh $libdir/sel.sh $action
+            ;;
+        "powerup")
+            $racadm serveraction $action
+            ;;
+        "powerdown")
+            $racadm serveraction $action
+            ;;
+        "hardreset")
+            $racadm serveraction $action
+            ;;
+        "createraid")
+            sh $libdir/raid.sh $action
+            ;;
+        "deleteraid")
+            sh $libdir/raid.sh $action
+            ;;
+        "fullssl")
+            sh $libdir/fullssl.sh
+            ;;
+        "resetssl")
+            $racadm sslresetcfg
+            ;;
+        "requestssl")
+            sh $libdir/requestssl.sh
+            ;;
+        "deployssl")
+            sh $libdir/deployssl.sh
+            ;;
+        "base")
+            sh $libdir/base.sh $action
+            ;;
+        "setconsole")
+            sh $libdir/console.sh $action
+            ;;
+        "monuser")
+            sh $libdir/monuser.sh
+            ;;
+        "rootpass")
+            sh $libdir/rootpass.sh
+            ;;
+        *)
+            echo "Uknown server action specified"
+            ;;
+    esac
 
-	echo " --- Work on $host is finished --- "
-	echo
-	shift
+    echo " --- Work on $host is finished --- "
+    echo
+    shift
 done

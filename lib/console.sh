@@ -6,11 +6,11 @@
 #$racadm get iDrac.NTPConfigGroup
 
 case "$model" in
-	iDRAC[78])
-		$racadm set iDRAC.VirtualConsole.AccessPrivilege "Full Access" 
-	;;
-	*)
-		echo "Can not view $host because of its hardware model '$model'!"
-	;;
+    iDRAC[78])
+        $racadm set iDRAC.VirtualConsole.AccessPrivilege "Full Access" 
+    ;;
+    *)
+        echo "Can not view $host because of its hardware model '$model'!"
+    ;;
 esac
 

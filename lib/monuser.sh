@@ -2,13 +2,13 @@
 
 
 case "$model" in
-	M1000e)
-		$racadm config -g cfgUserAdmin -o cfgUserAdminUserName  -i ${DEP_MONID} ${DEP_MONUSER}
-		$racadm config -g cfgUserAdmin -o cfgUserAdminPassword  -i ${DEP_MONID} ${DEP_MONPASS}
-		$racadm config -g cfgUserAdmin -o cfgUserAdminEnable    -i ${DEP_MONID} 1
-		$racadm config -g cfgUserAdmin -o cfgUserAdminPrivilege -i ${DEP_MONID} 0x00000000
-	;;
-	iDRAC[789])
+    M1000e)
+        $racadm config -g cfgUserAdmin -o cfgUserAdminUserName  -i ${DEP_MONID} ${DEP_MONUSER}
+        $racadm config -g cfgUserAdmin -o cfgUserAdminPassword  -i ${DEP_MONID} ${DEP_MONPASS}
+        $racadm config -g cfgUserAdmin -o cfgUserAdminEnable    -i ${DEP_MONID} 1
+        $racadm config -g cfgUserAdmin -o cfgUserAdminPrivilege -i ${DEP_MONID} 0x00000000
+    ;;
+    iDRAC[789])
         tf=$(mktemp)
         cat > $tf << EOF
 <SystemConfiguration>
@@ -26,20 +26,20 @@ case "$model" in
 </Component>
 </SystemConfiguration>
 EOF
-		$racadm set -f $tf -t xml
-	;;
-	iDRAC6-*)
-		$racadm config -g cfgIpmiLan -o cfgIpmiLanEnable 1
-		$racadm config -g cfgUserAdmin -o cfgUserAdminEnable    -i ${DEP_MONID} 1
-		$racadm config -g cfgUserAdmin -o cfgUserAdminUserName  -i ${DEP_MONID} ${DEP_MONUSER}
-		$racadm config -g cfgUserAdmin -o cfgUserAdminPassword  -i ${DEP_MONID} ${DEP_MONPASS}
-		$racadm config -g cfgUserAdmin -o cfgUserAdminPrivilege -i ${DEP_MONID} 0x00000000
-		$racadm config -g cfgUserAdmin -o cfgUserAdminIpmiLanPrivilege    -i ${DEP_MONID} 2
-		$racadm config -g cfgUserAdmin -o cfgUserAdminSolEnable -i ${DEP_MONID} 0
-		$racadm config -g cfgUserAdmin -o cfgUserAdminSolEnable           -i ${DEP_MONID} 0
-		;;
-	*)
-		echo "Can not configure $host because of its hardware model '$model'!"
-	;;
+        $racadm set -f $tf -t xml
+    ;;
+    iDRAC6-*)
+        $racadm config -g cfgIpmiLan -o cfgIpmiLanEnable 1
+        $racadm config -g cfgUserAdmin -o cfgUserAdminEnable    -i ${DEP_MONID} 1
+        $racadm config -g cfgUserAdmin -o cfgUserAdminUserName  -i ${DEP_MONID} ${DEP_MONUSER}
+        $racadm config -g cfgUserAdmin -o cfgUserAdminPassword  -i ${DEP_MONID} ${DEP_MONPASS}
+        $racadm config -g cfgUserAdmin -o cfgUserAdminPrivilege -i ${DEP_MONID} 0x00000000
+        $racadm config -g cfgUserAdmin -o cfgUserAdminIpmiLanPrivilege    -i ${DEP_MONID} 2
+        $racadm config -g cfgUserAdmin -o cfgUserAdminSolEnable -i ${DEP_MONID} 0
+        $racadm config -g cfgUserAdmin -o cfgUserAdminSolEnable           -i ${DEP_MONID} 0
+        ;;
+    *)
+        echo "Can not configure $host because of its hardware model '$model'!"
+    ;;
 esac
 
