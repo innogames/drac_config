@@ -108,6 +108,9 @@ while [ $# -ne 0 ]; do
         "14G Monolithic"|"14G Modular")
             export model="iDRAC9"
             ;;
+        "15G Monolithic"|"15G Modular")
+            export model="iDRAC9"
+            ;;
         *)
             echo "Unsupported ractype $ractype"
             exit 1
