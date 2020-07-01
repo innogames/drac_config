@@ -64,6 +64,7 @@ EOF
     $racadm config -f $tf
     rm $tf
     $racadm sslcsrgen -g
+    sleep 60 # This shit takes a lot of time
     $racadm sslcsrgen -f "${certdir}/${host}_csr.pem"
     ;;
     *)
