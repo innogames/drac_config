@@ -30,6 +30,7 @@ fi
 
 
 # Time zone
+export DEP_TZ=UTC
 export DEP_TIMEOFFSET=0
 export DEP_DAYLIGHTOFFSET=0
 
