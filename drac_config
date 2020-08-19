@@ -171,6 +171,9 @@ while [ $# -ne 0 ]; do
         "rootpass")
             sh $libdir/rootpass.sh
             ;;
+        "enableipmi")
+            sh $libdir/ipmi.sh
+            ;;
         *)
             echo "Uknown server action specified"
             ;;
