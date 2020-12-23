@@ -6,36 +6,38 @@ cat << EOF
 Usage: drac_confing action server...
  action - action to perform:
   # Server access
-  view       - connect to KVM
+  view            - connect to KVM
 
   # DRAC management
-  racreset   - restart DRAC
-  getsel     - get DRAC sel
-  clrsel     - clear DRAC sel
-  monuser    - configure monitoring user and its password
-  rootpass   - set root user password
+  racreset        - restart DRAC
+  getsel          - get DRAC sel
+  clrsel          - clear DRAC sel
+  monuser         - configure monitoring user and its password
+  rootpass        - set root user password
+  enableipmi      - enable IPMI on the DRAC
+  disablehotspare - disable PSU hotspare
 
   # Power management
-  powerup    - power on
-  powerdown  - power off
-  hardreset  - hard reset
+  powerup         - power on
+  powerdown       - power off
+  hardreset       - hard reset
 
   # RAID (only iDRAC7 and 8)
-  createraid - build a RAID1 of 2 first disks
-  deleteraid - delete any existing RAIDs
+  createraid      - build a RAID1 of 2 first disks
+  deleteraid      - delete any existing RAIDs
 
   # DRAC deployment
-  base       - configure all base settings: NTP, SNMP.
-               You can use DC environment variable to deploy settings for
-               a particular datacenter.
-  setconsole - configure virtual console access
+  base            - configure all base settings: NTP, SNMP.
+                    You can use DC environment variable to deploy settings for
+                    a particular datacenter.
+  setconsole      - configure virtual console access
 
   # SSL operations. Reuqires IG ca-utils in in the same directory as
   # drac_config is deployed.
-  fullssl    - perform full ssl deployment
-  resetssl   - reset SSL to default settings
-  requestssl - configure ssl settings and create a CSR
-  deployssl  - deploy signed cert
+  fullssl         - perform full ssl deployment
+  resetssl        - reset SSL to default settings
+  requestssl      - configure ssl settings and create a CSR
+  deployssl       - deploy signed cert
 
  server - one or more servers to connect to
 EOF
