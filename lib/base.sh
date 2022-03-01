@@ -33,6 +33,9 @@ cfgChassisDynamicPSUEngagementEnable=0
 
 [cfgLanNetworking]
 cfgDNSServer1=$DEP_DNS
+
+[cfgOobSnmp]
+cfgOobSnmpAgentEnable=0
 EOF
         $racadm config -f $tf
         rm $tf
