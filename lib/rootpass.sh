@@ -8,14 +8,19 @@ case "$model" in
         $racadm config -g cfgUserAdmin -o cfgUserAdminPassword  -i 1 ${DEP_CHPASS}
     ;;
     iDRAC[789])
-cat > /tmp/drac_config_user << EOF
-[iDRAC.Users.${DEP_ROOTID}]
-Password=${DEP_CHPASS}
+        tf=$(mktemp)
+cat > "$tf" << EOF
+<SystemConfiguration Model="" ServiceTag="" TimeStamp="">
+<Component FQDD="iDRAC.Embedded.1">
+<Attribute Name="Users.${DEP_ROOTID}#Password">${DEP_CHPASS}</Attribute>
+</Component>
+</SystemConfiguration>
 EOF
-        $racadm set -f /tmp/drac_config_user
+        $racadm set -f "$tf" -t xml
+        rm "$tf"
     ;;
     iDRAC6-*)
-        echo $racadm
+        echo "$racadm"
         $racadm config -g cfgUserAdmin -o cfgUserAdminPassword  -i ${DEP_ROOTID} ${DEP_CHPASS}
         ;;
     *)
