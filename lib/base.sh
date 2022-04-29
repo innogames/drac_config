@@ -72,6 +72,9 @@ EOF
 <Attribute Name="WebServer.1#CustomCipherString">ECDH+AESGCM:DH+AESGCM:ECDH+AES256:RSA+AESGCM:RSA+AES:!DH+AES256:CDH+AES128:!DH+AES:!aNULL:!MD5:!DSS</Attribute>
 <Attribute Name="SNMP.1#AgentEnable">Disabled</Attribute>
 </Component>
+<Component FQDD="System.Embedded.1">
+<Attribute Name="ServerPwr.1#PSRapidOn">Disabled</Attribute>
+</Component>
 </SystemConfiguration>
 EOF
         $racadm set -f $tf -t xml
