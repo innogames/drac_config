@@ -22,7 +22,6 @@ case "$model" in
     iDRAC[789])
         $racadm sslkeyupload -t  1 -f "$KEYFILE"
         $racadm sslcertupload -t 1 -f "$CHAINFILE"
-        $racadm racreset
     ;;
 esac
 
