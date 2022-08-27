@@ -38,17 +38,6 @@ EOF
         rm $tf
         $racadm setchassisname $host
     ;;
-    iDRAC6-*)
-        tf=$(mktemp)
-
-    cat > $tf << EOF
-[cfgRemoteHosts]
-cfgRhostsSyslogEnable=1
-cfgRhostsSyslogServer1=$DEP_SYSLOG
-EOF
-        $racadm config -f $tf
-        rm $tf
-    ;;
     iDRAC[789])
         tf=$(mktemp)
 
