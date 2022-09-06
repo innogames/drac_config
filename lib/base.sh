@@ -23,6 +23,7 @@ cfgRhostsSyslogPowerLoggingInterval=1
 cfgRacTuneIdracDNSLaunchEnable=1
 cfgRacTuneTimezoneOffset=$DEP_TIMEOFFSET
 cfgRacTuneDaylightOffset=$DEP_DAYLIGHTOFFSET
+cfgRacTuneTLSProtocolVersionEnable=2
 
 [cfgChassisPower]
 cfgChassisPowerCapPercent=100 %
