@@ -1,10 +1,10 @@
 #!/bin/sh
 
-certdir="${workdir}/../ca-utils/ipmi_certificates/"
+certdir="../ipmi_certificates"
 
-KEYFILE="${certdir}/${host}_key.pem"
-CERTFILE="${certdir}/${host}_cert.pem"
-CHAINFILE="${certdir}/${host}_cert_chain.pem"
+KEYFILE="${certdir}/${host}-key.pem"
+CERTFILE="${certdir}/${host}.pem"
+CHAINFILE="${certdir}/${host}-chain.pem"
 
 if ! [ -f "$CERTFILE" ]; then
     echo "Could not find certificate file for this server!"
