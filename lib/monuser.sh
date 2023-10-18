@@ -20,7 +20,7 @@ case "$model" in
 <Attribute Name="Users.${DEP_MONID}#IpmiLanPrivilege">user</Attribute>
 <Attribute Name="Users.${DEP_MONID}#Enable">Enabled</Attribute>
 <Attribute Name="Users.${DEP_MONID}#SolEnable">Disabled</Attribute>
-<Attribute Name="Users.${DEP_MONID}#ProtocolEnable">Disabled</Attribute>
+<Attribute Name="Users.${DEP_MONID}#ProtocolEnable">Enabled</Attribute>
 <Attribute Name="Users.${DEP_MONID}#AuthenticationProtocol">SHA</Attribute>
 <Attribute Name="Users.${DEP_MONID}#PrivacyProtocol">AES</Attribute>
 </Component>
