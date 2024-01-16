@@ -61,7 +61,7 @@ EOF
 <Component FQDD="iDRAC.Embedded.1">
 <Attribute Name="IPMILan.1#Enable">Enabled</Attribute>
 <Attribute Name="IPMILan.1#PrivLimit">Administrator</Attribute>
-<Attribute Name="SysLog.1#SysLogEnable">Disabled</Attribute>
+<Attribute Name="SysLog.1#SysLogEnable">Enabled</Attribute>
 <Attribute Name="SysLog.1#Server1">$DEP_SYSLOG</Attribute>
 <Attribute Name="NTPConfigGroup.1#NTPEnable">Enabled</Attribute>
 <Attribute Name="NTPConfigGroup.1#NTP1">$DEP_NTP1</Attribute>
