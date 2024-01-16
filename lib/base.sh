@@ -71,7 +71,9 @@ EOF
 <Attribute Name="WebServer.1#SSLEncryptionBitLength">256-Bit or higher</Attribute>
 <Attribute Name="WebServer.1#TLSProtocol">TLS 1.2 Only</Attribute>
 <Attribute Name="WebServer.1#CustomCipherString">ECDH+AESGCM:DH+AESGCM:ECDH+AES256:RSA+AESGCM:RSA+AES:!DH+AES256:CDH+AES128:!DH+AES:!aNULL:!MD5:!DSS</Attribute>
-<Attribute Name="SNMP.1#AgentEnable">Disabled</Attribute>
+<Attribute Name="SNMP.1#AgentEnable">Enabled</Attribute>
+<Attribute Name="SNMP.1#AgentCommunity">$DEP_MONPASS</Attribute>
+<Attribute Name="SNMP.1#SNMPProtocol">SNMPv3</Attribute>
 </Component>
 </SystemConfiguration>
 EOF
