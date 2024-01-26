@@ -68,8 +68,10 @@ EOF
 <Attribute Name="NTPConfigGroup.1#NTP2">$DEP_NTP2</Attribute>
 <Attribute Name="Time.1#TimeZone">$DEP_TZ</Attribute>
 <Attribute Name="IPv4Static.1#DNS1">$DEP_DNS</Attribute>
+<Attribute Name="WebServer.1#Http2Enable">Enabled</Attribute>
+<Attribute Name="WebServer.1#LowerEncryptionBitLength">Disable</Attribute>
 <Attribute Name="WebServer.1#SSLEncryptionBitLength">256-Bit or higher</Attribute>
-<Attribute Name="WebServer.1#TLSProtocol">TLS 1.2 Only</Attribute>
+<Attribute Name="WebServer.1#TLSProtocol">TLS 1.3 Only</Attribute>
 <Attribute Name="WebServer.1#CustomCipherString">ECDH+AESGCM:DH+AESGCM:ECDH+AES256:RSA+AESGCM:RSA+AES:!DH+AES256:CDH+AES128:!DH+AES:!aNULL:!MD5:!DSS</Attribute>
 <Attribute Name="SNMP.1#AgentEnable">Enabled</Attribute>
 <Attribute Name="SNMP.1#AgentCommunity">$DEP_MONPASS</Attribute>
