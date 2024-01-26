@@ -76,6 +76,10 @@ EOF
 <Attribute Name="SNMP.1#AgentEnable">Enabled</Attribute>
 <Attribute Name="SNMP.1#AgentCommunity">$DEP_MONPASS</Attribute>
 <Attribute Name="SNMP.1#SNMPProtocol">SNMPv3</Attribute>
+<Attribute Name="SSHCrypto.1#Ciphers">aes128-ctr,aes192-ctr,aes256-ctr,aes128-gcm@openssh.com,aes256-gcm@openssh.com</Attribute>
+<Attribute Name="SSHCrypto.1#HostKeyAlgorithms">ssh-rsa,rsa-sha2-512,rsa-sha2-256,ecdsa-sha2-nistp256,ssh-ed25519</Attribute>
+<Attribute Name="SSHCrypto.1#KexAlgorithms">curve25519-sha256,curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256</Attribute>
+<Attribute Name="SSHCrypto.1#MACs">umac-128-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,umac-128@openssh.com,hmac-sha2-256,hmac-sha2-512</Attribute>
 </Component>
 </SystemConfiguration>
 EOF
