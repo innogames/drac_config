@@ -19,10 +19,6 @@ EOF
         $racadm set -f "$tf" -t xml
         rm "$tf"
     ;;
-    iDRAC6-*)
-        echo "$racadm"
-        $racadm config -g cfgUserAdmin -o cfgUserAdminPassword  -i ${DEP_ROOTID} ${DEP_CHPASS}
-        ;;
     *)
         echo "Can not configure $host because of its hardware model '$model'!"
     ;;
