@@ -6,8 +6,7 @@
 # one.
 case "$model" in
     iDRAC[89])
-        IP=$(getent hosts "$host" | awk '{ print $1 }')
-        $RACADM -u ${USER} -p ${PASS} -r $IP set idrac.webserver.ManualDNSEntry "$host"
+        $racadm_ip set idrac.webserver.ManualDNSEntry "$host"
     ;;
     *)
         echo "This iDRAC model doesn't support setting the Webserver name"
