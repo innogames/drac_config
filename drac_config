@@ -76,12 +76,14 @@ if [ -z "$PASS" ]; then
 fi
 
 while [ $# -ne 0 ]; do
-    export host=$1
+    host_addr=$(getent hosts $1 | awk '{ print $1 }')
+    export host=$(getent hosts $1 | awk '{ print $2 }')
     export racadm="$RACADM -u ${USER} -p ${PASS} -r $host"
+    export racadm_ip="$RACADM -u ${USER} -p ${PASS} -r $host_addr"
 
-    echo " --- Working on $host --- "
+    echo " --- Working on $host $host_addr --- "
     echo "Trying to determine iDRAC model..."
-    ractype=$( ($racadm get iDRAC.Info | grep '#Type=' || $racadm  getconfig -g idracinfo | grep 'idRacType=' ) | tr -d '\r' | tr -d '\n' | cut -d '=' -f 2)
+    ractype=$( ($racadm_ip get iDRAC.Info | grep '#Type=' || $racadm_ip  getconfig -g idracinfo | grep 'idRacType=' ) | tr -d '\r' | tr -d '\n' | cut -d '=' -f 2)
     echo "DRAC type is ${ractype}"
 
     case "$ractype" in
