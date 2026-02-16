@@ -31,11 +31,9 @@ Usage: drac_confing action idrac...
                a particular datacenter.
   setconsole - configure virtual console access
 
-  # SSL operations. Reuqires IG ca-utils in in the same directory as
-  # drac_config is deployed.
-  fullssl    - perform full ssl deployment
+  # SSL operations. Requires ipmi_certificates directory in the same directory
+  # as drac_config is deployed.
   resetssl   - reset SSL to default settings
-  requestssl - configure ssl settings and create a CSR
   deployssl  - deploy signed cert
 
  idrac - one or more servers to connect to
@@ -148,14 +146,8 @@ while [ $# -ne 0 ]; do
         "deleteraid")
             sh $libdir/raid.sh $action
             ;;
-        "fullssl")
-            sh $libdir/fullssl.sh
-            ;;
         "resetssl")
             $racadm sslresetcfg
-            ;;
-        "requestssl")
-            sh $libdir/requestssl.sh
             ;;
         "deployssl")
             sh $libdir/deployssl.sh
