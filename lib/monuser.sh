@@ -16,7 +16,7 @@ case "$model" in
 <Attribute Name="IPMILan.1#Enable">Enabled</Attribute>
 <Attribute Name="Users.${DEP_MONID}#UserName">${DEP_MONUSER}</Attribute>
 <Attribute Name="Users.${DEP_MONID}#Password">${DEP_MONPASS}</Attribute>
-<Attribute Name="Users.${DEP_MONID}#Privilege">9</Attribute>
+<Attribute Name="Users.${DEP_MONID}#Privilege">1</Attribute>
 <Attribute Name="Users.${DEP_MONID}#IpmiLanPrivilege">user</Attribute>
 <Attribute Name="Users.${DEP_MONID}#Enable">Enabled</Attribute>
 <Attribute Name="Users.${DEP_MONID}#SolEnable">Disabled</Attribute>
