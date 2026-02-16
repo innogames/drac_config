@@ -14,3 +14,5 @@ for ROUTER in $ROUTERS; do
     eval "export DEP_NTP${I}='$ROUTER'"
     I=$(( I + 1 ))
 done
+
+export SERVER_HOSTNAME=$(adminapi -a hostname ipmi=$host)

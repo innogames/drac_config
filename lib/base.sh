@@ -58,6 +58,7 @@ EOF
 
     cat > $tf << EOF
 <SystemConfiguration Model="" ServiceTag="" TimeStamp="">
+
 <Component FQDD="iDRAC.Embedded.1">
 <Attribute Name="IPMILan.1#Enable">Enabled</Attribute>
 <Attribute Name="IPMILan.1#PrivLimit">Administrator</Attribute>
@@ -79,8 +80,20 @@ EOF
 <Attribute Name="SNMP.1#SNMPProtocol">SNMPv3</Attribute>
 <Attribute Name="VirtualConsole.1#PluginType">HTML5</Attribute>
 </Component>
+EOF
+
+if [ -n "$SERVER_HOSTNAME" ]; then
+    cat >> $tf << EOF
+<Component FQDD="System.Embedded.1">
+<Attribute Name="ServerOS.1#HostName">${SERVER_HOSTNAME}</Attribute>
+</Component>
+EOF
+fi
+
+cat >> $tf << EOF
 </SystemConfiguration>
 EOF
+        cat $tf
         $racadm set -f $tf -t xml
         rm $tf
     ;;
