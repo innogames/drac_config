@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -x
+
+ROUTE_NETWORK=$(adminapi -a route_network $host)
+GATEWAY=$(adminapi -a ipv6 'servertype=nat_gateway hostname=regexp("^internalgw") route_network='$ROUTE_NETWORK)
+ROUTERS=$(adminapi -a ipv6 'servertype=vlan_interface vlan_interface_of=regexp("router") route_network='$ROUTE_NETWORK)
+
+export DEP_DNS="$GATEWAY"
+export DEP_SYSLOG="$GATEWAY"
+
+I=1
+for ROUTER in $ROUTERS; do
+    eval "export DEP_NTP${I}='$ROUTER'"
+    I=$(( I + 1 ))
+done
