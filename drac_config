@@ -170,7 +170,7 @@ while [ $# -ne 0 ]; do
             sh $libdir/webservername.sh
             ;;
         *)
-            echo "Uknown server action specified"
+            echo "Unknown server action specified"
             ;;
     esac
 
