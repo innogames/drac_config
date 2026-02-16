@@ -54,12 +54,8 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
-workdir=$(dirname $0)
-oldpwd=$(pwd)
-cd $workdir
-export workdir=$(pwd)
+export workdir=$(realpath $(dirname $0))
 export libdir=$workdir/lib
-cd $oldpwd
 
 . $workdir/config
 
