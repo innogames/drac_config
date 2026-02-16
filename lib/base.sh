@@ -75,6 +75,7 @@ EOF
 <Attribute Name="SNMP.1#AgentEnable">Enabled</Attribute>
 <Attribute Name="SNMP.1#AgentCommunity">$DEP_MONPASS</Attribute>
 <Attribute Name="SNMP.1#SNMPProtocol">SNMPv3</Attribute>
+<Attribute Name="VirtualConsole.1#PluginType">HTML5</Attribute>
 </Component>
 </SystemConfiguration>
 EOF
