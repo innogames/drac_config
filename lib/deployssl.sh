@@ -2,9 +2,9 @@
 
 CERT_DIR=$(realpath $workdir/../ipmi_certificates)
 
-KEYFILE="${CERT_DIR}/${host}-key.pem"
-CERTFILE="${CERT_DIR}/${host}.pem"
-CHAINFILE="${CERT_DIR}/${host}-chain.pem"
+KEYFILE="${CERT_DIR}/${IDRAC_HOSTNAME}-key.pem"
+CERTFILE="${CERT_DIR}/${IDRAC_HOSTNAME}.pem"
+CHAINFILE="${CERT_DIR}/${IDRAC_HOSTNAME}-chain.pem"
 
 if ! [ -f "$KEYFILE" ] || ! [ -f "$CERTFILE" ] || ! [ -f "$CHAINFILE" ]; then
     echo "Could not find certificate file for this server!"

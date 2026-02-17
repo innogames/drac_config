@@ -10,7 +10,7 @@ case "$model" in
         $racadm set iDRAC.VirtualConsole.AccessPrivilege "Full Access" 
     ;;
     *)
-        echo "Can not view $host because of its hardware model '$model'!"
+        echo "Can not view ${IDRAC_HOSTNAME} because of its hardware model '$model'!"
     ;;
 esac
 

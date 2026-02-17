@@ -76,12 +76,12 @@ if [ -z "$PASS" ]; then
 fi
 
 while [ $# -ne 0 ]; do
-    host_addr=$(getent hosts $1 | awk '{ print $1 }')
-    export host=$(getent hosts $1 | awk '{ print $2 }')
-    export racadm="$RACADM -u ${USER} -p ${PASS} -r $host"
-    export racadm_ip="$RACADM -u ${USER} -p ${PASS} -r $host_addr"
+    export IDRAC_IPADDRESS=$(getent hosts $1 | awk '{ print $1 }')
+    export IDRAC_HOSTNAME=$(getent hosts $1 | awk '{ print $2 }')
+    export racadm="$RACADM -u ${USER} -p ${PASS} -r ${IDRAC_HOSTNAME}"
+    export racadm_ip="$RACADM -u ${USER} -p ${PASS} -r ${IDRAC_IPADDRESS}"
 
-    echo " --- Working on $host $host_addr --- "
+    echo " --- Working on ${IDRAC_HOSTNAME} ${IDRAC_IPADDRESS} --- "
     echo "Trying to determine iDRAC model..."
     ractype=$( ($racadm_ip get iDRAC.Info | grep '#Type=' || $racadm_ip  getconfig -g idracinfo | grep 'idRacType=' ) | tr -d '\r' | tr -d '\n' | cut -d '=' -f 2)
     echo "DRAC type is ${ractype}"
@@ -176,7 +176,7 @@ while [ $# -ne 0 ]; do
             ;;
     esac
 
-    echo " --- Work on $host is finished --- "
+    echo " --- Work on ${IDRAC_HOSTNAME} is finished --- "
     echo
     shift
 done

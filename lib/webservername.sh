@@ -6,7 +6,7 @@
 # one.
 case "$model" in
     iDRAC[89])
-        $racadm_ip set idrac.webserver.ManualDNSEntry "$host"
+        $racadm_ip set idrac.webserver.ManualDNSEntry "${IDRAC_HOSTNAME}"
     ;;
     *)
         echo "This iDRAC model doesn't support setting the Webserver name"

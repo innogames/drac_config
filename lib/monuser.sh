@@ -39,7 +39,7 @@ EOF
         $racadm config -g cfgUserAdmin -o cfgUserAdminSolEnable           -i ${DEP_MONID} 0
         ;;
     *)
-        echo "Can not configure $host because of its hardware model '$model'!"
+        echo "Can not configure ${IDRAC_HOSTNAME} because of its hardware model '$model'!"
     ;;
 esac
 

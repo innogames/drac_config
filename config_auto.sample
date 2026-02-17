@@ -2,7 +2,7 @@
 
 set -x
 
-ROUTE_NETWORK=$(adminapi -a route_network $host)
+ROUTE_NETWORK=$(adminapi -a route_network ${IDRAC_HOSTNAME})
 GATEWAY=$(adminapi -a ipv6 'servertype=nat_gateway hostname=regexp("^internalgw") route_network='$ROUTE_NETWORK)
 ROUTERS=$(adminapi -a ipv6 'servertype=vlan_interface vlan_interface_of=regexp("router") route_network='$ROUTE_NETWORK)
 
@@ -15,4 +15,4 @@ for ROUTER in $ROUTERS; do
     I=$(( I + 1 ))
 done
 
-export SERVER_HOSTNAME=$(adminapi -a hostname ipmi=$host)
+export SERVER_HOSTNAME=$(adminapi -a hostname ipmi=${IDRAC_HOSTNAME})

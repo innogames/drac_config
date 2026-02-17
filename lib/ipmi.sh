@@ -6,7 +6,7 @@ case "$model" in
         $racadm set iDRAC.IPMILan.PrivLimit 4
     ;;
     *)
-        echo "Can not change IPMI settings on $host because of its hardware model '$model'!"
+        echo "Can not change IPMI settings on ${IDRAC_HOSTNAME} because of its hardware model '$model'!"
     ;;
 esac
 

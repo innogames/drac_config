@@ -24,7 +24,7 @@ EOF
         $racadm config -g cfgUserAdmin -o cfgUserAdminPassword  -i ${DEP_ROOTID} ${DEP_CHPASS}
         ;;
     *)
-        echo "Can not configure $host because of its hardware model '$model'!"
+        echo "Can not configure ${IDRAC_HOSTNAME} because of its hardware model '$model'!"
     ;;
 esac
 

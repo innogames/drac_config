@@ -40,7 +40,7 @@ cfgOobSnmpAgentEnable=0
 EOF
         $racadm config -f $tf
         rm $tf
-        $racadm setchassisname $host
+        $racadm setchassisname ${IDRAC_HOSTNAME}
     ;;
     iDRAC6-*)
         tf=$(mktemp)
@@ -99,7 +99,7 @@ EOF
     ;;
 
     *)
-        echo "Can not view $host because of its hardware model '$model'!"
+        echo "Can not view ${IDRAC_HOSTNAME} because of its hardware model '$model'!"
     ;;
 esac
 
